@@ -9,8 +9,7 @@
 
 
 ### Installation
-
-Install the dependencies
+Follow this steps: 
 
 npm install
 
