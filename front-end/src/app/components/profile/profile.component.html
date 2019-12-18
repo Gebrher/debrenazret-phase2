@@ -1,0 +1,30 @@
+<div *ngIf="user">
+  <h2 class="page-header">{{user.firstName}}'s Profile</h2>
+    <form (submit)="onUpdateProfile()" >
+      <div class="form-group">
+        <label for="name">First Name: {{user.firstName}}</label>
+        <input type="text" [(ngModel)]="user.firstName" name="firstName" class="form-control" id="name" placeholder="Enter Your New First Name">
+      </div>
+      <div class="form-group">
+          <label for="name">Last Name: {{user.lastName}}</label>
+          <input type="text" [(ngModel)]="user.lastName" name="lastName" class="form-control" id="lastName" placeholder="Enter Your New Last Name">
+        </div>
+        <div class="form-group">
+            <label for="name">Phone Number: {{user.phone}}</label>
+            <input type="text" [(ngModel)]="user.phone" name="phone" class="form-control" id="phone" placeholder="Enter Your New Phone Number">
+          </div>
+      <div class="form-group">
+        <label for="username">Username: {{user.username}}</label>
+        <input type="text" [(ngModel)]="user.username" name="username" class="form-control" id="username" placeholder="Enter New Username">
+      </div>
+      <div class="form-group">
+        <label for="email">Email: {{user.email}}</label>
+        <input type="email" [(ngModel)]="user.email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Your New Email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+
+      <input type="submit" class="btn btn-primary" value="Update Profile">&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <button type="button" class="btn btn-outline-warning"(click)="deleteProfile()">Delete Profile</button>
+    </form>
+</div>

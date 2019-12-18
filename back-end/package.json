@@ -1,0 +1,36 @@
+{
+  "name": "debrenazret-eotc",
+  "version": "1.0.0",
+  "description": "Debrenazret Ethiopian Orthodox Tewahedo Curhch Web Portal",
+  "main": "app.js",
+  "scripts": {
+    "dev": "cross-env PORT=4000 LOG_LEVEL='dev' ts-node-dev --respawn --transpileOnly app.ts"
+  },
+  "dependencies": {
+    "@angular/cli": "^8.3.20",
+    "@types/typescript": "^2.0.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.2"
+  },
+  "author": "Beza Alemu Abi",
+  "license": "Debre Nazret",
+  "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
+    "@types/body-parser": "1.17.1",
+    "@types/cors": "2.8.6",
+    "@types/express": "4.17.2",
+    "@types/jsonwebtoken": "8.3.5",
+    "@types/mongoose": "^5.5.31",
+    "@types/passport": "1.0.2",
+    "@types/passport-jwt": "3.0.3",
+    "bcryptjs": "2.4.3",
+    "body-parser": "1.19.0",
+    "cors": "2.8.5",
+    "cross-env": "^6.0.3",
+    "express": "4.17.1",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "^5.7.11",
+    "passport": "0.4.0",
+    "passport-jwt": "4.0.0"
+  }
+}
