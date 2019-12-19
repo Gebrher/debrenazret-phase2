@@ -9,10 +9,13 @@
 
 
 ### Installation
-
-Install the dependencies
+Follow this steps: 
 
 npm install
+
+If prompt run npm audit fix
+
+Make sure your mongodb is running
 
 npm run dev
 
