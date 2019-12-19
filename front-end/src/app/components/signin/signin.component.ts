@@ -1,3 +1,4 @@
+import { ValidateService } from './../../services/validate.service';
 import { DatabaseService } from './../../services/database.service';
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
@@ -13,6 +14,7 @@ export class SigninComponent implements OnInit {
  password: string;
   constructor(
     private databaseServ: DatabaseService,
+    private validateServ: ValidateService,
     private router: Router,
     private flashMessage: FlashMessagesService) { }
 
@@ -23,6 +25,12 @@ onSignin() {
     username: this.username,
     password: this.password
   };
+
+  // Required fields
+  if ( !this.validateServ.validateSignin(user)) {
+    this.flashMessage.show('Please enter all fields', {cssClass: 'alert-danger', timeout: 3000});
+    return false;
+   }
 
   this.databaseServ.authenticate(user).subscribe(data => {
     if (data.success) {

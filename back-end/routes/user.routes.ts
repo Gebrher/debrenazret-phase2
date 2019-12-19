@@ -43,6 +43,9 @@ router.post('/signin', (req, res, next) => {
   const password = req.body.password;
   getUserByUsername(username, (err, user) => {
     if(err) throw err;
+    if(!user) {
+      return res.json({success: false, msg: 'Invalid username or password'});
+    }
   
   compareCredential(password, user.password, (err, isMatch) => {
       if(err) throw err;

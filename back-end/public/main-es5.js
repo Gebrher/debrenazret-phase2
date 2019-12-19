@@ -767,6 +767,16 @@
                 ProfileComponent.prototype.onUpdateProfile = function () {
                     var _this = this;
                     var user = this.user;
+                    // Required fields
+                    if (!this.validateServ.validateUpdate(user)) {
+                        this.flashMessage.show('Please enter all fields', { cssClass: 'alert-danger', timeout: 3000 });
+                        return false;
+                    }
+                    // Required fields
+                    if (!this.validateServ.validateEmail(user.email)) {
+                        this.flashMessage.show('Please enter valid email', { cssClass: 'alert-danger', timeout: 3000 });
+                        return false;
+                    }
                     this.databaseServ.updateProfile(user).subscribe(function (data) {
                         if (data.success) {
                             _this.databaseServ.signOut();
@@ -831,14 +841,16 @@
             __webpack_require__.r(__webpack_exports__);
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SigninComponent", function () { return SigninComponent; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/database.service */ "./src/app/services/database.service.ts");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-            /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/index.js");
-            /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
+            /* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/validate.service */ "./src/app/services/validate.service.ts");
+            /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../services/database.service */ "./src/app/services/database.service.ts");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/index.js");
+            /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/ __webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_5__);
             var SigninComponent = /** @class */ (function () {
-                function SigninComponent(databaseServ, router, flashMessage) {
+                function SigninComponent(databaseServ, validateServ, router, flashMessage) {
                     this.databaseServ = databaseServ;
+                    this.validateServ = validateServ;
                     this.router = router;
                     this.flashMessage = flashMessage;
                 }
@@ -850,6 +862,11 @@
                         username: this.username,
                         password: this.password
                     };
+                    // Required fields
+                    if (!this.validateServ.validateSignin(user)) {
+                        this.flashMessage.show('Please enter all fields', { cssClass: 'alert-danger', timeout: 3000 });
+                        return false;
+                    }
                     this.databaseServ.authenticate(user).subscribe(function (data) {
                         if (data.success) {
                             _this.databaseServ.storeData(data.token, data.user);
@@ -865,12 +882,13 @@
                 return SigninComponent;
             }());
             SigninComponent.ctorParameters = function () { return [
-                { type: _services_database_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseService"] },
-                { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-                { type: angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__["FlashMessagesService"] }
+                { type: _services_database_service__WEBPACK_IMPORTED_MODULE_2__["DatabaseService"] },
+                { type: _services_validate_service__WEBPACK_IMPORTED_MODULE_1__["ValidateService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+                { type: angular2_flash_messages__WEBPACK_IMPORTED_MODULE_5__["FlashMessagesService"] }
             ]; };
             SigninComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
                     selector: 'app-signin',
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./signin.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/signin/signin.component.html")).default,
                     styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./signin.component.css */ "./src/app/components/signin/signin.component.css")).default]
@@ -1097,10 +1115,30 @@
                         return true;
                     }
                 };
+                ValidateService.prototype.validateUpdate = function (user) {
+                    // tslint:disable-next-line: triple-equals
+                    if (user.firstName == undefined || user.lastName == undefined || user.phone == undefined ||
+                        // tslint:disable-next-line: triple-equals
+                        user.username == undefined || user.email == undefined || user.password == undefined) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                };
                 ValidateService.prototype.validateEmail = function (email) {
                     // tslint:disable-next-line: max-line-length
                     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return re.test(email);
+                };
+                ValidateService.prototype.validateSignin = function (user) {
+                    // tslint:disable-next-line: triple-equals
+                    if (user.username == undefined || user.password == undefined) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
                 };
                 return ValidateService;
             }());

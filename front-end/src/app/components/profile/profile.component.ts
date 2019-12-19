@@ -38,6 +38,19 @@ export class ProfileComponent implements OnInit {
   onUpdateProfile() {
   const user = this.user;
 
+  // Required fields
+  if ( !this.validateServ.validateUpdate(user)) {
+    this.flashMessage.show('Please enter all fields', {cssClass: 'alert-danger', timeout: 3000});
+    return false;
+   }
+
+   // Required fields
+  if ( !this.validateServ.validateEmail(user.email)) {
+     this.flashMessage.show('Please enter valid email', {cssClass: 'alert-danger', timeout: 3000});
+
+     return false;
+    }
+
   this.databaseServ.updateProfile(user).subscribe(data => {
         if (data.success) {
             this.databaseServ.signOut();
