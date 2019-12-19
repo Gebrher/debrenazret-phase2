@@ -804,17 +804,19 @@ let ProfileComponent = class ProfileComponent {
         });
     }
     deleteProfile() {
-        this.databaseServ.deleteProfile().subscribe(data => {
-            if (data.success) {
-                this.databaseServ.signOut();
-                this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
-                this.router.navigate(['/']);
-            }
-            else {
-                this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 6000 });
-                this.router.navigate(['/signin']);
-            }
-        });
+        if (confirm('Are you sure to delete your profile ?')) {
+            this.databaseServ.deleteProfile().subscribe(data => {
+                if (data.success) {
+                    this.databaseServ.signOut();
+                    this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+                    this.router.navigate(['/']);
+                }
+                else {
+                    this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 6000 });
+                    this.router.navigate(['/signin']);
+                }
+            });
+        }
     }
 };
 ProfileComponent.ctorParameters = () => [

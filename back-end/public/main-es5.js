@@ -791,17 +791,19 @@
                 };
                 ProfileComponent.prototype.deleteProfile = function () {
                     var _this = this;
-                    this.databaseServ.deleteProfile().subscribe(function (data) {
-                        if (data.success) {
-                            _this.databaseServ.signOut();
-                            _this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
-                            _this.router.navigate(['/']);
-                        }
-                        else {
-                            _this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 6000 });
-                            _this.router.navigate(['/signin']);
-                        }
-                    });
+                    if (confirm('Are you sure to delete your profile ?')) {
+                        this.databaseServ.deleteProfile().subscribe(function (data) {
+                            if (data.success) {
+                                _this.databaseServ.signOut();
+                                _this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+                                _this.router.navigate(['/']);
+                            }
+                            else {
+                                _this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 6000 });
+                                _this.router.navigate(['/signin']);
+                            }
+                        });
+                    }
                 };
                 return ProfileComponent;
             }());
