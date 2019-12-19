@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteProfile() {
-
+      if (confirm('Are you sure to delete your profile ?')) {
     this.databaseServ.deleteProfile().subscribe(data => {
       if (data.success) {
                   this.databaseServ.signOut();
@@ -84,5 +84,6 @@ export class ProfileComponent implements OnInit {
 
   }
 
+}
 
 }
