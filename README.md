@@ -11,19 +11,20 @@ This application is webportal for Debrenazret Ethiopian Orthodox Tewahedo Church
 # Few Features 
 If you are not logged in, you will not be able to see some protected resources like dashboard and profile.
 These rosources are protecte by AuthGuard
-![Home](https://github.com/Gebrher/debrenazret-phase2/images/home.png)
+
+![Home](https://github.com/Gebrher/debrenazret-phase2/tree/master/images/home.png)
 
 If you are logged in you will see protected resources
 
-![Protected](https://github.com/Gebrher/debrenazret-phase2/images/protected.png)
+![Protected](https://github.com/Gebrher/debrenazret-phase2/tree/master/images/protected.png)
 
 The app uses angular flash messages for actions and results output notification
 
-![Messages](https://github.com/Gebrher/debrenazret-phase2/images/messages.png)
+![Messages](https://github.com/Gebrher/debrenazret-phase2/tree/masterimages/messages.png)
 
 With the app you can be able to edit and delete profile
 
-![Edit](https://github.com/Gebrher/debrenazret-phase2/images/edit.png)
+![Edit](https://github.com/Gebrher/debrenazret-phase2/tree/masterimages/edit.png)
 
 # Testing
 I have created one test file that can be tested with Karma
