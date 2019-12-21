@@ -12,7 +12,7 @@ This application is webportal for Debrenazret Ethiopian Orthodox Tewahedo Church
 If you are not logged in, you will not be able to see some protected resources like dashboard and profile.
 These rosources are protecte by AuthGuard
 
-![](https://github.com/Gebrher/debrenazret-phase2/blob/master/images/home.PNG)
+![Home](https://github.com/Gebrher/debrenazret-phase2/blob/master/images/home.PNG)
 
 If you are logged in you will see protected resources
 
